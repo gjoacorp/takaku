@@ -358,18 +358,6 @@ unsigned int board::get_size() const { return this->board_size; }
 
 void board::set_size(const unsigned int& size) { this->board_size = size; }
 
-void board::set_default_circle_color(const Color& col) { this->default_circle_color = col; }
-
-void board::set_frozen_circle_color(const Color& col) { this->frozen_circle_color = col; }
-
-void board::set_source_circle_color(const Color& col) { this->source_circle_color = col; }
-
-Color board::get_default_circle_color() const { return this->default_circle_color; }
-
-Color board::get_frozen_circle_color() const { return this->frozen_circle_color; }
-
-Color board::get_source_circle_color() const { return this->source_circle_color; }
-
 void board::set_player_colors(const std::vector<Color>& colors_v) { this->p_colors_v_ = colors_v; }
 
 std::vector<Color> board::get_player_colors() const { return this->p_colors_v_; }
