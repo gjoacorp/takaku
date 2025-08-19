@@ -1,10 +1,10 @@
 # takaku
 
-takaku is a implementation of the pencil-and-paper abstract strategy game [Sim](https://en.wikipedia.org/wiki/Sim_(game)) written in C++ using raylib.
+## What is takaku?
 
-It features:
-- Support for arbitrarily large board sizes.
-- Versus human and versus AI (one difficulty) game modes.
-- An interactive board (graph) with vertices that can be moved around the screen.
+takaku (多角) is a C++/[raylib](https://www.raylib.com) implementation of the abstract strategy game [Sim](https://en.wikipedia.org/wiki/Sim_(game)).
 
-You can build the project using the provided Makefile, though you will need to install raylib.
+## Features
+- Supports playing on boards of arbitrarily large size.
+- Versus human and versus AI game modes.
+- A dynamic board. 
