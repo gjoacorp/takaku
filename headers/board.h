@@ -31,7 +31,6 @@ class board : public entity {
     std::tuple<bool, std::vector<circle*>, Color> mono_tri_data;
 
     bool game_over = false;
-    bool ai_enabled = false;
     bool initialised = false;
     bool player_idx;
 
@@ -46,6 +45,8 @@ class board : public entity {
     bool init_triangle_shader();
 
   public:
+    bool ai_enabled = false;
+    
     Color default_circle_color = BLACK;
     Color frozen_circle_color = PURPLE;
     Color source_circle_color = PINK;
@@ -78,9 +79,6 @@ class board : public entity {
 
     void set_player_colors(const std::vector<Color>& colors_v);
     std::vector<Color> get_player_colors() const;
-
-    void set_ai_enabled(const bool& b);
-    bool get_ai_enabled() const;
 
     double get_time_since_last_move() const;
 

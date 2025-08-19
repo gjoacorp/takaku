@@ -210,11 +210,11 @@ int main(void)
             // If opponent is computer
             if ( mode_selector_active_item == 0 )
             {
-               b.set_ai_enabled(true);
+               b.ai_enabled = true;
                b.set_player_idx( rand() % 2 ); // Randomly choose whether the player moves first or second
             }
             else
-               b.set_ai_enabled(false);
+               b.ai_enabled = false;
 
             b.init_circles(300.0f, 30.0f, game_manager::selected_board_size);
          }
@@ -223,7 +223,7 @@ int main(void)
             if ( arrows_button.get_activated() )
                b.return_circles_to_initial_positions();
 
-            if ( b.get_ai_enabled() && !b.is_game_over() && b.get_turn_idx() == !b.get_player_idx() )
+            if ( b.ai_enabled && !b.is_game_over() && b.get_turn_idx() == !b.get_player_idx() )
             {
                float loading_f = b.get_time_since_last_move();
                float think_time = 1.0f;
@@ -346,7 +346,7 @@ int main(void)
 
          DrawTextEx(rockwell, std::to_string(b.get_line_counter()).c_str(), (Vector2){static_cast<float>(window_width) - 60.0f, static_cast<float>(window_height) - 60.0f}, 48, 2.0f, RAYWHITE);
 
-         if ( b.get_ai_enabled() )
+         if ( b.ai_enabled )
          {
             // Who is who bottom-left corner UI
             DrawRectangle(25, window_height - 75, 50, 50, RED);
