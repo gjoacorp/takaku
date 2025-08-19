@@ -85,8 +85,8 @@ int main(void)
    board b(Vector2(0,0), window_width);
    b.set_color(CYBER_BLUE);
    b.set_player_colors(player_colors);
-   b.set_default_circle_color(CYBER_BASE); 
-   b.set_frozen_circle_color(CYBER_LIGHT); 
+   b.default_circle_color = CYBER_BASE;
+   b.frozen_circle_color = CYBER_LIGHT;
 
    //////////////////////////////////////////////////////////////////////////////
    //// RECT BUTTON INITIALISATION
