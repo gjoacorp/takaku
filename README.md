@@ -26,5 +26,7 @@ Traditionally, Sim is played on a piece of paper on which the vertices are obvio
 I was in a bit of a daze when I created takaku (I was midway through completing my master's degree in mathematics) and, as a result, I'm not entirely happy with the state of the codebase. Hence, the current focus is on repaying some technical debt (refactoring) and not adding new features.
 
 ## Making contributions
-
-I would be overjoyed if anyone wants to help assist me with the development of this project. The best way to help out would be to look for refactoring opportunities within the codebase and submit pull requests for review. If you have any questions, please feel free to submit an issue.
+If you want to contribute to help make takaku better, firstly, you have my eternal gratitude. Secondly, here's some ways that you can help out:
+- Reporting bugs that you find whilst playing takaku. Alternatively, you can actively search for bugs by trying to break the game in interesting ways.
+- Suggest new feature ideas that you have.
+- If you'd like to contribute code, look for refactoring opportunities and submit a PR.
