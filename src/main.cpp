@@ -84,7 +84,7 @@ int main(void)
   // Board set-up
   board b(Vector2(0,0), window_width);
   b.set_color(CYBER_BLUE);
-  b.set_player_colors(player_colors);
+  b.player_colors = player_colors;
   b.default_circle_color = CYBER_BASE;
   b.frozen_circle_color = CYBER_LIGHT;
 

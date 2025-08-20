@@ -4,11 +4,11 @@
 #include <iostream>
 #include "../include/raymath.h"
 
-board::board(const Vector2& position, const unsigned int& board_size, const unsigned int& num_players, const std::vector<Color>& colors_v ) : entity(position) 
+board::board(const Vector2& position, const unsigned int& board_size, const unsigned int& num_players, const std::vector<Color>& colors ) : entity(position) 
 {
   this->board_size = board_size;
   this->num_players_ = num_players;
-  this->p_colors_v_ = colors_v;
+  player_colors = colors;
 
   const bool success = this->init_triangle_shader();
   if ( success )
@@ -95,7 +95,7 @@ void board::update(const float& delta)
       }
       else 
       {
-        this->circles[i].set_color( this->p_colors_v_[turn_idx] );
+        this->circles[i].set_color( player_colors[turn_idx] );
       }
 
 
@@ -122,7 +122,7 @@ void board::update(const float& delta)
 
 bool board::simulate_move(circle*& circ_a, circle*& circ_b) 
 {
-  this->lines.push_back( line (circ_a, circ_b, 0.0f, this->p_colors_v_[this->turn_idx] ) );
+  this->lines.push_back( line (circ_a, circ_b, 0.0f, player_colors[this->turn_idx] ) );
   bool losing_move = std::get<0>(contains_monochromatic_triangle());
   this->lines.pop_back();
   return losing_move;
@@ -130,7 +130,7 @@ bool board::simulate_move(circle*& circ_a, circle*& circ_b)
 
 void board::make_move(circle*& circ_a, circle*& circ_b) 
 {
-  this->lines.push_back( line(circ_a, circ_b, this->p_colors_v_[this->turn_idx]) );
+  this->lines.push_back( line(circ_a, circ_b, this->player_colors[this->turn_idx]) );
   this->line_counter++;
 
   circ_a = nullptr;
@@ -357,10 +357,6 @@ void board::thaw_circles()
 unsigned int board::get_size() const { return this->board_size; }
 
 void board::set_size(const unsigned int& size) { this->board_size = size; }
-
-void board::set_player_colors(const std::vector<Color>& colors_v) { this->p_colors_v_ = colors_v; }
-
-std::vector<Color> board::get_player_colors() const { return this->p_colors_v_; }
 
 unsigned int board::get_line_counter() const { return this->line_counter; }
 
