@@ -34,7 +34,7 @@ class board : public entity {
     bool initialised = false;
     bool player_idx;
 
-    Shader triangle_shader;
+    Shader triangle_shader_;
 
     std::vector<circle> circles;
 

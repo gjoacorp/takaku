@@ -10,28 +10,28 @@ board::board(const Vector2& position, const unsigned int& board_size, const unsi
   this->num_players_ = num_players;
   player_colors = colors;
 
-  const bool success = this->init_triangle_shader();
+  const bool success = init_triangle_shader();
   if ( success )
-    std::cout << "triangle_shader loaded successfully" << std::endl;
+    std::cout << "triangle shader loaded successfully" << std::endl;
   else
-    std::cout << "SHADER ERROR: triangle_shader was not loaded successfully" << std::endl;
+    std::cout << "SHADER ERROR: triangle shader was not loaded successfully" << std::endl;
 }
 
 board::board(const Vector2& position, const unsigned int& board_size) : entity(position) 
 {
   this->board_size = board_size;
 
-  const bool success = this->init_triangle_shader();
+  const bool success = init_triangle_shader();
   if ( success )
-    std::cout << "triangle_shader loaded successfully" << std::endl;
+    std::cout << "triangle shader loaded successfully" << std::endl;
 
   else
-    std::cout << "SHADER ERROR: triangle_shader was not loaded successfully" << std::endl;
+    std::cout << "SHADER ERROR: triangle shader was not loaded successfully" << std::endl;
 }
 
 board::~board()
 {
-  UnloadShader(this->triangle_shader);
+  UnloadShader(triangle_shader_);
 }
 
 void board::update(const float& delta) 
@@ -39,7 +39,7 @@ void board::update(const float& delta)
   if (this->initialised)
   {
     const float time_elapsed = static_cast<float>(this->_timer.time_elapsed());
-    SetShaderValue(this->triangle_shader, this->time_uniform_loc, &time_elapsed, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(triangle_shader_, this->time_uniform_loc, &time_elapsed, SHADER_UNIFORM_FLOAT);
 
     for (int i = 0; i < this->circles.size(); ++i) 
     {
@@ -182,7 +182,7 @@ void board::draw()
     Color tri_color = std::get<2>(this->mono_tri_data);
     tri_color.a = 200;
 
-    BeginShaderMode(this->triangle_shader);
+    BeginShaderMode(triangle_shader_);
 
     DrawTriangle(tri_verts[0]->get_position(), tri_verts[1]->get_position(), tri_verts[2]->get_position(), tri_color);
     DrawTriangle(tri_verts[1]->get_position(), tri_verts[0]->get_position(), tri_verts[2]->get_position(), tri_color);
@@ -312,10 +312,10 @@ bool board::is_move_valid(circle*& circ_a, circle*& circ_b) {
 
 bool board::init_triangle_shader() 
 {
-  this->triangle_shader = LoadShader(0, TextFormat("shaders/rt.fs", GLSL_VERSION));
-  if ( IsShaderValid(this->triangle_shader) )
+  triangle_shader_ = LoadShader(0, TextFormat("shaders/rt.fs", GLSL_VERSION));
+  if ( IsShaderValid(triangle_shader_) )
   {
-    this->time_uniform_loc = GetShaderLocation(this->triangle_shader, "time");
+    this->time_uniform_loc = GetShaderLocation(triangle_shader_, "time");
     return true;
   }
   return false;
