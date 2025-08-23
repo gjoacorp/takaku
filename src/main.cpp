@@ -5,8 +5,6 @@
 #include "../headers/data_manager.h"
 #include "../headers/game_manager.h"
 #include "../headers/rect_button.h"
-#include <numbers>
-#include <cmath>
 #include <iostream>
 #include <vector>
 #include <string>
