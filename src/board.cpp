@@ -4,9 +4,9 @@
 #include <iostream>
 #include "../include/raymath.h"
 
-board::board(const Vector2& position, const unsigned int& board_size, const unsigned int& num_players, const std::vector<Color>& colors ) : entity(position) 
+board::board(const Vector2& position, const unsigned int& size, const unsigned int& num_players, const std::vector<Color>& colors ) : entity(position) 
 {
-  this->board_size = board_size;
+  this->size = size;
   this->num_players_ = num_players;
   player_colors = colors;
 
@@ -17,9 +17,9 @@ board::board(const Vector2& position, const unsigned int& board_size, const unsi
     std::cout << "SHADER ERROR: triangle shader was not loaded successfully" << std::endl;
 }
 
-board::board(const Vector2& position, const unsigned int& board_size) : entity(position) 
+board::board(const Vector2& position, const unsigned int& size) : entity(position) 
 {
-  this->board_size = board_size;
+  this->size = size;
 
   const bool success = init_triangle_shader();
   if ( success )
@@ -103,7 +103,7 @@ void board::update(const float& delta)
       {
         Vector2 mp = GetMousePosition();
 
-        if ( ( mp.x > this->get_position().x ) && ( mp.x < this->get_position().x + this->board_size ) && ( mp.y > this->get_position().y ) && ( mp.y < this->get_position().y + this->board_size ) )
+        if ( ( mp.x > this->get_position().x ) && ( mp.x < this->get_position().x + this->size ) && ( mp.y > this->get_position().y ) && ( mp.y < this->get_position().y + this->size ) )
         {
           this->draggable_circle->set_position(GetMousePosition());
           this->draggable_circle->set_target_position(GetMousePosition());
@@ -152,7 +152,7 @@ void board::make_move(circle*& circ_a, circle*& circ_b)
 void board::draw() 
 {
   // Drawing the background rectangle of the board
-  DrawRectangleV(this->get_position(), Vector2(this->board_size, this->board_size), this->get_color());
+  DrawRectangleV(this->get_position(), Vector2(this->size, this->size), this->get_color());
 
   for (int i = 0; i < this->circles.size(); ++i) 
   {
@@ -162,8 +162,7 @@ void board::draw()
   if ( !this->lines.empty() ) 
   {
     for (int i = 0; i < this->line_counter; ++i) 
-    {
-      if ( (this->lines[i].get_source() != nullptr) && (this->lines[i].get_target() != nullptr) ) 
+    { if ( (this->lines[i].get_source() != nullptr) && (this->lines[i].get_target() != nullptr) ) 
       {
         if ( i == lines.size() - 1 )
           lines[i].set_thickness(12.0f);
@@ -199,8 +198,8 @@ void board::draw()
 
 void board::init_circles(const float& poly_radius, const float& circle_radius, const unsigned int& num_circles) 
 {
-  int centre_x = this->get_position().x + (this->board_size / 2); 
-  int centre_y = this->get_position().y + (this->board_size / 2);
+  int centre_x = this->get_position().x + (this->size / 2); 
+  int centre_y = this->get_position().y + (this->size / 2);
   double angle = (2.0f * 3.14159265358979323846) / (double)num_circles;
 
   for (int i = 0; i < num_circles; ++i) 
@@ -353,10 +352,6 @@ void board::thaw_circles()
 }
 
 // Getters and setters
-
-unsigned int board::get_size() const { return this->board_size; }
-
-void board::set_size(const unsigned int& size) { this->board_size = size; }
 
 unsigned int board::get_line_counter() const { return this->line_counter; }
 

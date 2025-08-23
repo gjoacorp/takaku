@@ -195,7 +195,7 @@ int main(void)
         SetWindowSize(window_width, window_height);
 
         data_manager::save_sr_config(window_width, window_height, sr_dd_active_item);
-        b.set_size(window_width);
+        b.size = window_width;
       }
     }
 

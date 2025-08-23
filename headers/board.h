@@ -10,8 +10,6 @@
 
 class board : public entity {
   private:
-    unsigned int board_size;
-
     unsigned int num_players_ = 2; 
     unsigned int turn_idx = 0; // Keeps track of which player is making the current move
     unsigned int line_counter = 0;
@@ -44,6 +42,7 @@ class board : public entity {
     bool init_triangle_shader();
 
   public:
+    unsigned int size;
     bool ai_enabled = false;
     
     Color default_circle_color = BLACK;
@@ -55,8 +54,8 @@ class board : public entity {
     std::vector<line> lines;
     std::vector<Vector2> circle_initial_positions;
 
-    board(const Vector2& position, const unsigned int& board_size, const unsigned int& num_players, const std::vector<Color>& colors_v); 
-    board(const Vector2& position, const unsigned int& board_size);
+    board(const Vector2& position, const unsigned int& size, const unsigned int& num_players, const std::vector<Color>& colors_v); 
+    board(const Vector2& position, const unsigned int& size);
     ~board();
 
     void update(const float& delta);
@@ -74,9 +73,6 @@ class board : public entity {
     std::tuple<bool, std::vector<circle*>, Color> contains_monochromatic_triangle();
 
     // Getters and setters
-
-    void set_size(const unsigned int& size);
-    unsigned int get_size() const;
 
     double get_time_since_last_move() const;
 
