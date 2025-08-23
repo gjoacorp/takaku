@@ -366,7 +366,3 @@ int board::get_losing_player() const { return this->losing_player; }
 bool board::is_initialised() const { return this->initialised; }
 
 double board::get_time_since_last_move() const { return this->_timer.time_elapsed(); }
-
-void board::set_player_idx(const bool& b) { this->player_idx = b; }
-
-bool board::get_player_idx() const { return this->player_idx; }

@@ -211,7 +211,7 @@ int main(void)
         if ( mode_selector_active_item == 0 )
         {
           b.ai_enabled = true;
-          b.set_player_idx( rand() % 2 ); // Randomly choose whether the player moves first or second
+          b.player_idx = rand() % 2 ; // Randomly choose whether the player moves first or second
         }
         else
           b.ai_enabled = false;
@@ -223,7 +223,7 @@ int main(void)
         if ( arrows_button.get_activated() )
           b.return_circles_to_initial_positions();
 
-        if ( b.ai_enabled && !b.is_game_over() && b.get_turn_idx() == !b.get_player_idx() )
+        if ( b.ai_enabled && !b.is_game_over() && b.get_turn_idx() == !b.player_idx )
         {
           float loading_f = b.get_time_since_last_move();
           float think_time = 1.0f;
@@ -239,13 +239,13 @@ int main(void)
         {
           b.reset_board();
           updated_win_loss = false;
-          b.set_player_idx( rand() % 2 );
+          b.player_idx = rand() % 2;
         }
 
         // Horrible if statement -- essentially handles whether wins/losses should be written to file and updated
         if  ( mode_selector_active_item == 0 && b.get_losing_player() != -1 && !updated_win_loss )
         {
-          if ( b.get_losing_player() == !b.get_player_idx() )
+          if ( b.get_losing_player() == !b.player_idx )
           {
             win_loss_data.first++;
             data_manager::save_storage_value(2U * ( game_manager::selected_board_size - 6 ), win_loss_data.first);
@@ -272,12 +272,12 @@ int main(void)
         game_manager::show_warning_box = false;
       }
       // If the opponent is a robot, the player moves first, and they haven't moved yet
-      else if ( b.get_player_idx() == 0 && b.get_line_counter() < 1 )
+      else if ( b.player_idx == 0 && b.get_line_counter() < 1 )
       {
         game_manager::show_warning_box = false;
       }
       // If the opponent is a robot, the player moves second, and they haven't moved yet
-      else if ( b.get_player_idx() == 1 && b.get_line_counter() < 2 )
+      else if ( b.player_idx == 1 && b.get_line_counter() < 2 )
       {
         game_manager::show_warning_box = false;
       }
@@ -302,7 +302,7 @@ int main(void)
     if ( b.is_game_over() )
     {
       std::string text = "";
-      if ( b.get_player_idx() != b.get_losing_player() ) 
+      if ( b.player_idx != b.get_losing_player() ) 
         text = "Victory!";
       else
         text = "Defeat!";
@@ -352,12 +352,12 @@ int main(void)
         DrawRectangle(25, window_height - 75, 50, 50, RED);
         DrawRectangle(25, window_height - 135, 50, 50, BLUE);
 
-        if (b.get_player_idx() == 0)
+        if (b.player_idx == 0)
         {
           DrawTextEx(rockwell, "you", (Vector2){30, static_cast<float>(window_height) - 60.0f}, 24, 2.0f, RAYWHITE);
           DrawTextEx(rockwell, "ai", (Vector2){30, static_cast<float>(window_height) - 115.0f}, 24, 2.0f, RAYWHITE);
         }
-        else if (b.get_player_idx() == 1)
+        else if (b.player_idx == 1)
         {
           DrawTextEx(rockwell, "ai", (Vector2){30, static_cast<float>(window_height) - 60.0f}, 24, 2.0f, RAYWHITE);
           DrawTextEx(rockwell, "you", (Vector2){30, static_cast<float>(window_height) - 115.0f}, 24, 2.0f, RAYWHITE);

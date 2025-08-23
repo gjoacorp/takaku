@@ -30,7 +30,6 @@ class board : public entity {
 
     bool game_over = false;
     bool initialised = false;
-    bool player_idx;
 
     Shader triangle_shader_;
 
@@ -43,7 +42,9 @@ class board : public entity {
 
   public:
     unsigned int size;
+
     bool ai_enabled = false;
+    bool player_idx;
     
     Color default_circle_color = BLACK;
     Color frozen_circle_color = PURPLE;
@@ -88,8 +89,5 @@ class board : public entity {
 
     void reset_board();
     void hard_reset_board();
-
-    void set_player_idx(const bool& b);
-    bool get_player_idx() const;
 };
 #endif
